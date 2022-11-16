@@ -1,6 +1,16 @@
 [
     {
-        "title":"Test Title",
-        "text":"Test text"
+        "title": "Test Title",
+        "text": "Test text"
+    },
+    {
+        "title": "Sup",
+        "text": "My Dude",
+        "guid": 1234
+    },
+    {
+        "title": "Jared",
+        "text": "check check",
+        "guid": 1234
     }
 ]

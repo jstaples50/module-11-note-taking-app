@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const notesData = require('./db/db.json');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,6 +25,24 @@ app.get('/notes', (req, res) => {
 
 // API routes
 
+const writeToFile = (destination, content) =>
+fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
+    err ? console.error(err) : console.info(`\nData written to ${destination}`)
+);
+
+const readAndAppend = (content, file) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        const parsedData = JSON.parse(data);
+        parsedData.push(content);
+        writeToFile(file, parsedData);
+      }
+    });
+  };
+
+
 app.get('/api/notes', (req, res) => {
     console.log(req.method);
     res.json(notesData);
@@ -31,6 +50,7 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
     console.log(req.method);
+
 
     const { title, text } = req.body;
 
@@ -40,6 +60,8 @@ app.post('/api/notes', (req, res) => {
             text,
             guid: 1234
         }
+
+        readAndAppend(newNote, './db/db.json');
         
         const response = {
             status: 'success', 
@@ -47,7 +69,8 @@ app.post('/api/notes', (req, res) => {
         }
         
         console.log(response);
-        res.status(201).json(response);
+        // res.status(201).json(response);
+        res.json(response);
     }
 })
 
