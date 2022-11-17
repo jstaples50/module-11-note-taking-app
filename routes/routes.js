@@ -1,11 +1,10 @@
 const rb = require('express').Router();
 const { v4: uuidv4 } = require('uuid');
-const { readAndAppend, readFromDatabase } = require('../helper/fs_helper');
+const { readAndAppend,  readFromFile } = require('../helper/fs_helper');
 
 rb.get('/', (req, res) => {
     console.log(`${req.method} request recieved for notes`);
-    const data = readFromDatabase('./db/db.json');
-    res.json(data);
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 rb.post('/', (req, res) => {
@@ -16,7 +15,7 @@ rb.post('/', (req, res) => {
         const newNote = {
             title, 
             text,
-            guid: uuidv4(),
+            id: uuidv4(),
         }
 
         readAndAppend(newNote, './db/db.json');

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const util = require('util');
 
 // Functions to read, write, and append to files
 
@@ -20,15 +21,7 @@ const readAndAppend = (content, file) => {
   };
 
 
-const readFromDatabase = (file) => {
-    fs.readFile(file, 'utf8', (err, data) => {
-        if (err) {
-            console.error(err);
-        } else {
-            return data;
-        }
-    })
-}
+  const readFromFile = util.promisify(fs.readFile);
 
 
-  module.exports = { readAndAppend, readFromDatabase };
+  module.exports = { readAndAppend, readFromFile };
