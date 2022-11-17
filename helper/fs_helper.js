@@ -1,4 +1,4 @@
-const fs = require('js');
+const fs = require('fs');
 
 // Functions to read, write, and append to files
 

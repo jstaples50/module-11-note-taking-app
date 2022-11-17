@@ -4,7 +4,7 @@ const { readAndAppend, readFromDatabase } = require('../helper/fs_helper');
 
 rb.get('/', (req, res) => {
     console.log(`${req.method} request recieved for notes`);
-    const data = readFromDatabase('../db/db.json');
+    const data = readFromDatabase('./db/db.json');
     res.json(data);
 });
 
@@ -19,7 +19,7 @@ rb.post('/', (req, res) => {
             guid: uuidv4(),
         }
 
-        readAndAppend(newNote, '../db/db.json');
+        readAndAppend(newNote, './db/db.json');
     
         const response = {
             status: 'success',
