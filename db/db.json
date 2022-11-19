@@ -2,30 +2,5 @@
     {
         "title": "Test Title",
         "text": "Test text"
-    },
-    {
-        "title": "Sup",
-        "text": "My Dude",
-        "id": 1234
-    },
-    {
-        "title": "Jared",
-        "text": "check check",
-        "id": 1234
-    },
-    {
-        "title": "Check",
-        "text": "1223",
-        "id": "3913c888-467d-4446-96cd-d99a3849f6fb"
-    },
-    {
-        "title": "hhhh",
-        "text": "ghgh",
-        "id": "bf3c7a90-fd88-426e-8e03-9ee6ce23724c"
-    },
-    {
-        "title": "Is it working?",
-        "text": "yes?",
-        "id": "9f77a45a-2861-4228-b174-454aac6a709c"
     }
 ]
