@@ -1,5 +1,6 @@
 const rb = require('express').Router();
 
+const { application } = require('express');
 // Function to create a universally unique id
 const { v4: uuidv4 } = require('uuid');
 
@@ -35,5 +36,13 @@ rb.post('/', (req, res) => {
         res.json(response);
     }
 });
+
+rb.delete('/:id', (req, res) => {
+    const { id } = req.body;
+    console.log(`${req.method} request recieved for notes`);
+    if (id) {
+        res.send('DELETE request recieved');
+    }
+})
 
 module.exports = rb;
