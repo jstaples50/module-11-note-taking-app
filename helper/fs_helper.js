@@ -20,8 +20,24 @@ const readAndAppend = (content, file) => {
     });
   };
 
+  const deleteNoteFromFile = (id, file) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        let parsedData = JSON.parse(data);
+        const deleted = parsedData.find(note => note.id === id);
+        console.log(deleted);
+        parsedData = parsedData.filter(note => note.id !== id);
+        writeToFile(file, parsedData);
+      }
+    })
+  }
+
 
   const readFromFile = util.promisify(fs.readFile);
 
 
-  module.exports = { readAndAppend, readFromFile };
+
+
+  module.exports = { readAndAppend, readFromFile, deleteNoteFromFile };

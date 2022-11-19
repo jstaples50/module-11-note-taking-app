@@ -4,7 +4,7 @@ const { application } = require('express');
 // Function to create a universally unique id
 const { v4: uuidv4 } = require('uuid');
 
-const { readAndAppend,  readFromFile } = require('../helper/fs_helper');
+const { readAndAppend,  readFromFile, deleteNoteFromFile } = require('../helper/fs_helper');
 
 
 // GET route for notes
@@ -38,10 +38,13 @@ rb.post('/', (req, res) => {
 });
 
 rb.delete('/:id', (req, res) => {
-    const { id } = req.body;
+    const { id } = req.params;
     console.log(`${req.method} request recieved for notes`);
     if (id) {
+        deleteNoteFromFile(id, './db/db.json')
         res.send('DELETE request recieved');
+    } else {
+        res.status(404).json({'message': 'Could not find note at this id'});
     }
 })
 
